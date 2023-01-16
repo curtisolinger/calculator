@@ -1,3 +1,4 @@
+from art import logo
 
 
 def add(x, y):
@@ -23,36 +24,41 @@ binary_operations = {
 # function = binary_operation[operator]
 # print(function(3, 4))
 
-num1 = int(input("What's the first number? "))
+def calculator():
 
-for operator in binary_operations:
-	print(operator)
-operation = input("Pick an operation from the lines above: ")
+	print(logo)
 
-num2 = int(input("What's the second number? "))
 
-calculation_function = binary_operations[operation]
-answer = calculation_function(num1, num2)
-print(f"{num1} {operation} {num2} = {answer}")
+	num1 = float(input("What's the first number? "))
 
-stop_operation = False
+	for operator in binary_operations:
+		print(operator)
 
-while not stop_operation:
-	response = input(f"Type 'y' to continue calculation with {answer}, or type 'n' to exit. ").lower()
+	continue_operation = True
 
-	if response == "y":
-		operation = input("Very well, please pick an operation: ")
+	while continue_operation:
+
+		operation = input("Pick an operation from the lines above: ")
+
+		num2 = float(input("What's the second number? "))
+
 		calculation_function = binary_operations[operation]
+		answer = calculation_function(num1, num2)
 
-		num = int(input("What's the next number? "))
-		
-		tmp = calculation_function(answer, num)
-		print(f"{answer} {operation} {num} = {tmp}")
-		answer = tmp
-	else:
-		print("Exit")
-		stop_operation = True
 
+		print(f"{num1} {operation} {num2} = {answer}")
+
+		response = input(f"Type 'y' to continue calculation with {answer}, or type 'n' to start a new calculation. Type control + c to exit").lower()
+
+		if response == "y":
+			num1 = answer
+		else:
+			continue_operation = False
+			calculator()
+
+calculator()
+
+	
 
 
 
